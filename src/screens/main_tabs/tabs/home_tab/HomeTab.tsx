@@ -1,8 +1,9 @@
 import {FlatList, Image, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View} from "react-native";
-import {categories, Category} from "../../models/Category.ts";
+import {categories, Category} from "../../../../models/Category.ts";
 
-import {mockProducts, Product} from "../../models/Product.ts";
+import {mockProducts, Product} from "../../../../models/Product.ts";
 import {Carousel} from "react-native-reanimated-carousel";
+import {SafeAreaView} from "react-native-safe-area-context";
 
 // Text -> Text
 // Button - Button
@@ -11,51 +12,55 @@ import {Carousel} from "react-native-reanimated-carousel";
 // ListView.builder -> Flatlist
 // SingleChildScrollView -> ScrollView
 //TextField -> TextInput
-const blue = '#004182'
+export const blue = '#004182'
 
 function HomeTab() {
     return (
-        <ScrollView>
-            <View style={styles.screenContainer}>
-                <Image source={require("../../assets/images/route_logo.png")}
-                       style={styles.logo}/>
-                <SearchBarAndCartRow/>
-                <AdsCarosuel/>
-                <Categories/>
-                <ProductsSection/>
-            </View>
-        </ScrollView>
+        <SafeAreaView edges={['top']}>
+            <ScrollView>
+                <View style={styles.screenContainer}>
+                    <Image source={require("../../../../assets/images/route_logo.png")}
+                           style={styles.logo}/>
+                    <SearchBarAndCartRow/>
+                    <AdsCarosuel/>
+                    <Categories/>
+                    <ProductsSection/>
+                </View>
+            </ScrollView>
+        </SafeAreaView>
+
       )
 }
 
 function SearchBarAndCartRow() {
     return (<View style={{flexDirection: 'row', alignItems: 'center', gap: 8}}>
         <View style={styles.searchContainer}>
-            <Image source={require("../../assets/images/ic_search.png")}/>
+            <Image source={require("../../../../assets/images/ic_search.png")}/>
 
             <TextInput placeholder='What do u search for?'
                        placeholderTextColor={blue} style={{color: blue}}/>
         </View>
-        <Image source={require("../../assets/images/ic_cart.png")}/>
+        <Image source={require("../../../../assets/images/ic_cart.png")}/>
     </View>)
 }
 
 const ads = [
-    require("../../assets/images/ads_img.png"),
-    require("../../assets/images/ads_img.png"),
-    require("../../assets/images/ads_img.png"),
+    require("../../../../assets/images/ads_img.png"),
+    require("../../../../assets/images/ads_img.png"),
+    require("../../../../assets/images/ads_img.png"),
 ]
 
 function AdsCarosuel() {
     const {width} = useWindowDimensions();
+    const fullWidth = width - 32
     return (<Carousel
-        style={{height: 200, width}}
+        style={{height: 200, width: fullWidth}}
         data={ads}
         autoplay={true}
         autoplayInterval={2000}
         renderItem={({item}) => (
             <View style={{alignItems: "center", justifyContent: "center", }}>
-                <Image style={{marginHorizontal: 16, padding:16}} source={item}/>
+                <Image style={{marginHorizontal: 16, padding:16, width: fullWidth - 16}} source={item}/>
             </View>
         )}
     />)
@@ -87,7 +92,7 @@ function Categories() {
 
 function CategoryItem({name, image}: Category) {
     return (<View style={{marginHorizontal: 16}}>
-        <Image source={require("../../assets/images/ads_img.png")} style={{width: 100, height: 100, borderRadius: 50}}/>
+        <Image source={require("../../../../assets/images/ads_img.png")} style={{width: 100, height: 100, borderRadius: 50}}/>
         <Text style={{color: blue}}>{name}</Text>
     </View>)
 }
@@ -118,7 +123,7 @@ function ProductItem({product}: { product: Product }) {
         borderWidth: 1,
         paddingBottom: 8
     }}>
-        <Image source={require("../../assets/images/product_img.jpg")}
+        <Image source={require("../../../../assets/images/product_img.jpg")}
                style={{width: '100%', height: 120, borderTopLeftRadius: 16, borderTopRightRadius: 16}}/>
         <View style={{marginHorizontal: 8, gap: 8}}>
             <Text style={{color: blue,}} numberOfLines={2}>{product.name}</Text>
@@ -138,14 +143,14 @@ function ProductItem({product}: { product: Product }) {
             </View>
         </View>
 
-        <Image style={{position: 'absolute', right: 0}} source={require("../../assets/images/ic_favorite.png")}/>
+        <Image style={{position: 'absolute', right: 0}} source={require("../../../../assets/images/ic_favorite.png")}/>
 
     </View>)
 }
 
 const styles = StyleSheet.create({
     screenContainer: {
-        margin: 16,
+        marginHorizontal: 16,
         flex: 1,
         gap: 18
     },
