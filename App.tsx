@@ -8,10 +8,10 @@ import {StatusBar, useColorScheme} from 'react-native';
 import {
     SafeAreaProvider,
 } from 'react-native-safe-area-context';
-import HomeTab from "./src/screens/main_tabs/tabs/home_tab/HomeTab.tsx";
+import HomeTab from "./src/features/commerce/screens/main_tabs/tabs/home_tab/HomeTab.tsx";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 import {NavigationContainer} from "@react-navigation/native";
-import RootNavigation from "./src/screens/RootNavigation.tsx";
+import RootNavigation from "./src/RootNavigation.tsx";
 import Toast from "react-native-toast-message";
 
 function App() {

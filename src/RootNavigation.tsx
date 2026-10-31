@@ -1,8 +1,8 @@
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import LoginScreen from "./login/LoginScreen.tsx";
-import MainTabs from "./main_tabs/MainTabs.tsx";
+import LoginScreen from "./features/auth/screens/login/LoginScreen.tsx";
+import MainTabs from "./features/commerce/screens/main_tabs/MainTabs.tsx";
 import {useEffect, useState} from "react";
-import {tokenStorage} from "../core/async_storage/asyncStorageHelper.ts";
+import {tokenStorage} from "./core/async_storage/asyncStorageHelper.ts";
 import {ActivityIndicator, View} from "react-native";
 
 

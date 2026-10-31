@@ -1,15 +1,16 @@
 import {ActivityIndicator, Button, Image, Pressable, StyleSheet, Text, View} from "react-native";
-import {blue} from "../main_tabs/tabs/home_tab/HomeTab.tsx";
 import {SafeAreaView} from "react-native-safe-area-context";
-import AppTextField from "../../common/AppTextField.tsx";
-import {isValidEmail, isValidPassword} from '../validators/validators.ts';
+import AppTextField from "../../../common_ui/components/AppTextField.tsx";
+import {isValidEmail, isValidPassword} from '../../../../core/validators/validators.ts';
 import React, {useState} from "react";
-import {login} from "../../api/apiServices.ts";
 import {useNavigation} from "@react-navigation/native";
-import {NativeStackScreenProps} from "@react-navigation/native-stack";
-import {RootStackParams} from "../RootNavigation.tsx";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
+import {RootStackParams} from "../../../../RootNavigation.tsx";
 import axios from "axios";
 import Toast from "react-native-toast-message";
+import {login} from "../../../network/apis/auth/authApis.ts";
+import {globalStyles} from "../../../common_ui/GlobalStyles.ts";
+import {colors} from "../../../../core/theme/colors.ts";
 
 type LoginErrors = { email?: string, password?: string }
 
@@ -19,7 +20,7 @@ export default function LoginScreen() {
     const [formErrors, setFormErrors] = useState<LoginErrors>({email, password})
     const [loading, setLoading] = useState<boolean>(false);
 
-    const navigation = useNavigation<NativeStackScreenProps<RootStackParams>>();
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
 
     const validate = (): boolean => {
         let isValid = true;
@@ -69,7 +70,7 @@ export default function LoginScreen() {
     return (
         <SafeAreaView style={styles.screenContainer}>
             <View style={{gap: 12}}>
-                <Image style={styles.headerImage} source={require('../../assets/images/route_logo_large.png')}/>
+                <Image style={styles.headerImage} source={require('../../../../assets/images/route_logo_large.png')}/>
                 <View style={{height: "18%"}}/>
                 <Text style={styles.title}>Welcome Back to route</Text>
                 <Text style={styles.subTitle}>Please sign in with your mail</Text>
@@ -108,7 +109,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
     screenContainer: {
         flex: 1,
-        backgroundColor: blue,
+        backgroundColor: colors.blue,
         padding: 16,
     },
     headerImage: {
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 18,
         fontWeight: "bold",
-        color: blue,
+        color: colors.blue,
     },
 
 })

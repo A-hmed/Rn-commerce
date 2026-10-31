@@ -1,24 +1,13 @@
 // var dio = Dio(BaseOptions(baseUrl: "", headers))
 
 import axios, {AxiosError, AxiosResponse, InternalAxiosRequestConfig} from "axios";
-import {AuthResponse, User} from "./models/response/authResponse.ts";
-import {tokenStorage} from "../core/async_storage/asyncStorageHelper.ts";
 
-const apiClient = axios.create({
+export const apiClient = axios.create({
     baseURL: 'https://ecommerce.routemisr.com/api/v1/',
     headers: {
         'Content-Type': 'application/json',
     }
 })
-
-
-export async function login(email: string, password: string): Promise<any> {
-    const response = await apiClient.post<AuthResponse>("auth/signin", {email, password});
-    if (response.data.token) {
-        await tokenStorage.save(response.data.token);
-    }
-    return response.data;
-}
 
 
 // 1. REQUEST INTERCEPTOR
